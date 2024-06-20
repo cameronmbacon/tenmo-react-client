@@ -1,0 +1,12 @@
+.dashboard-container {
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    min-height: 95vh;
+    padding-bottom: 60px;
+}
+
+.content {
+    margin-top: 18%;
+    flex-grow: 1;
+}

@@ -1,0 +1,25 @@
+.transfer-brief-details {
+    display: flex;
+    flex-direction: row;
+    font-size: 0.75em;
+}
+
+li.status-field {
+    margin-left: 15%;
+    right: 1%;
+}
+
+.submit-transfer-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.accept-container {
+    font-size: 2rem;
+    color: rgba(21, 173, 21, 0.816);
+}
+
+.reject-container {
+    font-size: 2rem;
+    color: rgba(194, 20, 20, 0.824);
+}

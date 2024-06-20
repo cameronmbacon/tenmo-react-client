@@ -1,0 +1,39 @@
+.transfer-options {
+    padding-top: 30%;
+}
+
+.transfer-options li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    list-style: none;
+    margin: 10% 20px;
+    font-size: 1.5rem;
+}
+
+.transfer-options li:last-child {
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 10%;
+}
+
+.new-transfer li {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.new-transfer li p {
+    justify-content: right;
+}
+
+.btn {
+    display: block;
+    margin: 25% auto;
+    justify-content: center !important;
+    bottom: 5%;
+}
+
+.tall-menu {
+    min-height: 70%;
+}

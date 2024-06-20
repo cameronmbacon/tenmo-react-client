@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+:root {
+  --primary-first-color: #097518;
+  --primary-one-faded-color: rgba(71, 251, 86, 0.583);
+  --primary-two-faded-color: rgba(3, 97, 11, 0.494);
+  --primary-faded-color: linear-gradient(var(--primary-one-faded-color), var(--primary-two-faded-color));
+  --primary-second-color: rgba(29, 180, 49);
+  --primary-color: linear-gradient(var(--primary-first-color), var(--primary-second-color));
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Outfit", sans-serif;
+}
+
+body {
+  background: var(--primary-color);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.app-container {
+  min-height: fit-content;
+}
+
+.container {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.btn {
+  background: var(--primary-color);
+  color: #ffffff;
+  padding: 14px 25px;
+  font-size: 2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+}
+
+.attribution {
+  font-size: 2px;
+  margin: 0;
+  padding: 0;
+}
+
+/* ----------- Media Query ----------- */
+
+@media(max-width: 840px) {
+  .container {
+      min-height: 95vh;
+  }
+}

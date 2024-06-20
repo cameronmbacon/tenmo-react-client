@@ -1,0 +1,63 @@
+.home-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+.hero {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(rgba(8,0,58,0.7), rgba(8,0,58,0.7)), url('../assets/receiving-money.gif');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-text {
+    margin-top: 25%;
+    margin-bottom: 25%;
+    text-align: center;
+    max-width: 800px;
+    font-size: 1.25rem;
+}
+
+.hero-text .login {
+    padding-left: 0px;
+}
+
+.hero-text .login span {
+    color: var(--primary-second-color);
+}
+
+.hero-text h1 {
+    font-size: 60px;
+    font-weight: 600;
+}
+
+.hero-text h4 {
+    margin-bottom: 30%;
+}
+
+/* ----------- Media Query ----------- */
+
+@media(max-width: 840px) {
+    .hero-text {
+        top: 25%;
+        max-width: 70%;
+    }
+
+    .welcome-headline {
+        margin-bottom: 15% !important;
+    }
+
+    .welcome-headline h1 {
+        margin: 0;
+        line-height: 1;
+    }
+
+    .hero-text p {
+        margin-bottom: 50%;
+    }
+}
