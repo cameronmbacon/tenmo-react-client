@@ -23,9 +23,8 @@ const TransferMenu = ({ toggleTransferMenu, user }) => {
     const [transferTypeId, setTransferTypeId] = useState(1);
     const [userTo, setUserTo] = useState({});
     const [usernameTo, setUsernameTo] = useState('' || userTo.username);
-    const [account, setAccount] = useState({});
     const [accountTo, setAccountTo] = useState({});
-    const [amount, setAmount] = useState(0.01);
+    const [amount, setAmount] = useState(0.00);
     const [newTransfer, setNewTransfer] = useState({});
 
     useEffect(() => {
@@ -62,6 +61,7 @@ const TransferMenu = ({ toggleTransferMenu, user }) => {
             const accountFrom = await fetchAccountByUserId(user.id);
             let accountFromId = accountFrom.id;
             let accountToId = accountTo.id;
+            setAmount(parseFloat(amount).toFixed(2));
             let newTransfer = {};
 
             if (accountFromId === accountToId) {
@@ -76,7 +76,6 @@ const TransferMenu = ({ toggleTransferMenu, user }) => {
             }
 
             setNewTransfer(newTransfer);
-            setAccount(accountFrom);
             setTransferCreated(true);
         } catch (error) {
             console.error('Cannot transfer to the same account:', error);
@@ -85,11 +84,12 @@ const TransferMenu = ({ toggleTransferMenu, user }) => {
 
     const navigateToDashboard = async () => {
         const updatedTransfers = await fetchTransfersForUser(user.id);
+        const updatedAccount = await fetchAccountByUserId(user.id);
         toggleTransferMenu();
         navigate('/dashboard',
             { state: {
                 user,
-                account: account,
+                account: updatedAccount,
                 transfers: updatedTransfers,
             },
         });
@@ -148,10 +148,13 @@ const TransferMenu = ({ toggleTransferMenu, user }) => {
                                 Amount: $
                             </label>
                             <input type='number'
-                                value={amount} 
-                                step={'0.01'}
+                                inputMode='numeric'
+                                value={amount}
+                                min='0.01'
+                                step='0.01'
+                                placeholder='0.01'
                                 className='amount-input'
-                                onChange={(e) => setAmount(parseFloat(e.target.value).toFixed(2))} />
+                                onChange={(e) => setAmount(e.target.value)} />
                         </li>
                     </ul>
                     {error && <p style={{ color: 'red', fontSize: '0.8em' }}>{error}</p>}

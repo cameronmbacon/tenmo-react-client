@@ -21,3 +21,6 @@ yarn-debug.log*
 yarn-error.log*
 
 .env
+
+# Vecteezy stock video too large for GitHub repo
+/src/assets/receiving-money.gif
