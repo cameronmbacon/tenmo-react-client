@@ -148,7 +148,7 @@ const TransferMenu = ({ toggleTransferMenu, user }) => {
                                 Amount: $
                             </label>
                             <input type='number'
-                                inputMode='numeric'
+                                inputMode='decimal'
                                 value={amount}
                                 min='0.01'
                                 step='0.01'
