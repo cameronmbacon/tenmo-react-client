@@ -13,7 +13,7 @@ const Login = () => {
     const location = useLocation();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(null || location.state);
     const message = location.state ? location.state.message : null;
     const { login } = useAuth();
     const { fetchAccountByUserId, fetchTransfersForUser } = useTenmoApi();

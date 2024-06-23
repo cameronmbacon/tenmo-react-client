@@ -17,11 +17,12 @@ const Header = () => {
 
   return (
     <nav className='nav-container'>
-        <div className='logo'><Link to={currentUser ? '/dashboard' : '/'} smooth='true'><GiMoneyStack /><span>TEnmo</span></Link></div>
+        <div className='logo'><Link style={currentUser && { pointerEvents: 'none' }} to='/' smooth='true'><GiMoneyStack /><span>TEnmo</span></Link></div>
+        {!currentUser &&
         <ul className={mobileMenu ? '' : 'hide-mobile-menu'}>
-            <li><Link to={'./'}>About</Link></li>
-            <li><Link to={'./'}>Team</Link></li>
-        </ul>
+            <li><Link to={'./about'}>About</Link></li>
+            <li><Link to={'./team'}>Team</Link></li>
+        </ul>}
         <div className='menu-icon' onClick={toggleMenu}><BiMenuAltRight /></div>
     </nav>
   );

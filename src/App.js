@@ -5,6 +5,8 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import Header from './components/Header';
+import Team from './components/Team';
+import About from './components/About';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
@@ -15,6 +17,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/team" element={<Team />} />
         <Route element={<ProtectedRoute />}>
           <Route path='/dashboard' element={<Dashboard />} />
         </Route>

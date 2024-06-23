@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Account from './Account';
 import Transfers from './Transfers';
@@ -13,9 +13,10 @@ const Dashboard = () => {
     const { fetchAccountByUserId, fetchTransfersForUser } = useTenmoApi();
 
     const location = useLocation();
+    const navigate = useNavigate();
     const { user, account: initialAccount, transfers } = location.state || {};
     const [initialized, setInitialized] = useState(false);
-    const [currentUser, setCurrentUser] = useState(user || JSON.parse(localStorage.getItem('user')));
+    const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')) || user);
     const [account, setAccount] = useState(initialAccount || {});
     const [currentTransfers, setCurrentTransfers] = useState(transfers || []);
     const [showMenu, setShowMenu] = useState(false);
@@ -26,23 +27,31 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                if (!currentUser) {
-                    setCurrentUser(JSON.parse(localStorage.getItem('user')));
+                let userData = currentUser;
+
+                if (!userData) {
+                    userData = JSON.parse(localStorage.getItem('user'));
+                    if (!userData) {
+                        navigate('/login');
+                        return;
+                    }
+                    setCurrentUser(userData);
                 }
 
                 if (!account || Object.keys(account).length === 0) {
-                    const accountData = await fetchAccountByUserId(currentUser.id);
+                    const accountData = await fetchAccountByUserId(userData.id);
                     setAccount(accountData);
                 }
 
                 if (!transfers || transfers.length === 0) {
-                    const transfersData = await fetchTransfersForUser(currentUser.id);
+                    const transfersData = await fetchTransfersForUser(userData.id);
                     setCurrentTransfers(transfersData);
                 }
 
                 setInitialized(true);
             } catch (error) {
                 console.error('Error fetching data', error);
+                navigate('/login');
             }
         };
 
@@ -50,7 +59,7 @@ const Dashboard = () => {
             initialLoad.current = false;
             fetchData();
         }
-    }, [currentUser, account, transfers, initialized, fetchAccountByUserId, fetchTransfersForUser]);
+    }, [currentUser, account, transfers, initialized, navigate, fetchAccountByUserId, fetchTransfersForUser]);
 
     useEffect(() => {
         if (user) {

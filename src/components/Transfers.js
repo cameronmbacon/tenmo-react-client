@@ -1,15 +1,35 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Transfer from './Transfer';
+import useTenmoApi from '../hooks/useTenmoApi';
+import { logout as apiLogout } from '../api/auth';
+import { useAuth } from '../context/AuthContext';
 
 import '../styles/Transfers.css';
 
 const Transfers = ({ transfers, account }) => {
 
-    const [filteredTransfers, setFilteredTransfers] = useState(transfers);
+    const { logout } = useAuth();
+    const navigate = useNavigate();
+
+    const { fetchTransfersForUser } = useTenmoApi();
+
+    const [filteredTransfers, setFilteredTransfers] = useState([]);
+    const currentUser = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
-        setFilteredTransfers(transfers);
+        if (transfers) {
+            setFilteredTransfers(transfers);
+        } else {
+            handleLogout();
+        }
     }, [transfers]);
+
+    const handleLogout = () => {
+        apiLogout();
+        logout();
+        navigate('/login');
+    };
 
     if (!transfers || transfers.length === 0) {
         return (
@@ -19,7 +39,13 @@ const Transfers = ({ transfers, account }) => {
         );
     }
 
-    const filterTransfers = (status) => {
+    const filterTransfers = async (status) => {
+        let currentTransfers = transfers;
+
+        if (!currentTransfers || currentTransfers.length === 0) {
+            currentTransfers = await fetchTransfersForUser(currentUser.id);
+        }
+
         if (!status || status === 'All') {
             setFilteredTransfers(transfers);
         } else {
